@@ -1,0 +1,8 @@
+SELECT name FROM locations
+WHERE ST_DWithin(
+    ST_MakePoint(longitude, latitude)::geography,
+    ST_MakePoint(-73.968285, 40.785091)::geography,
+    10000
+);
+
+Analysis:(PART-1) The given SQL query selects names from the "locations" table based on their geographical proximity to a specified point. To optimize this query, you can create a spatial index on the "geometry" or "geography" column used in the ST_DWithin function. Additionally, consider using a more specific radius based on the actual distance range of interest, and ensure that the coordinates are in the same spatial reference system for accurate distance calculations. These optimizations can enhance the query's performance when searching for locations within a certain distance from a given point.

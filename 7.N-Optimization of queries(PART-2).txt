@@ -1,0 +1,19 @@
+-- Temporary table to hold parks
+WITH Parks AS (
+    SELECT id, name, ST_MakePoint(longitude, latitude)::geography AS geom
+    FROM locations
+    WHERE feature_type = 'Park'
+),
+-- Select parks within 10,000 meters of a specific point
+NearbyParks AS (
+    SELECT name
+    FROM Parks
+    WHERE ST_DWithin(
+        geom,
+        ST_MakePoint(-73.968285, 40.785091)::geography, -- Example coordinates
+        10000 -- Distance in meters
+    )
+)
+SELECT * FROM NearbyParks;
+
+Analysis:(PART-2) The provided SQL query efficiently identifies parks within a 10,000-meter radius of a specific point. The use of Common Table Expressions (CTEs) helps organize the query by first creating a temporary table ("Parks") containing park information and then selecting nearby parks in a second CTE ("NearbyParks"). Utilizing CTEs improves query readability and maintainability. To further optimize, consider indexing the "geometry" or "geography" column in the "locations" table and ensuring the coordinates share the same spatial reference system for accurate distance calculations.

@@ -1,0 +1,5 @@
+SELECT ST_Distance(l1.geom, l2.geom) AS distance
+FROM (SELECT ST_MakePoint(longitude, latitude)::geography AS geom FROM locations WHERE id = 1) l1,
+     (SELECT ST_MakePoint(longitude, latitude)::geography AS geom FROM locations WHERE id = 2) l2;
+
+Analysis: This SQL query calculates the distance between two geographical points specified by the latitude and longitude coordinates of locations with IDs 1 and 2. It uses the ST_MakePoint function to create geometries from the coordinates and then calculates the distance between these points using the ST_Distance function. The result, labeled as "distance," represents the distance between the specified locations in the database, providing valuable spatial information for analysis or applications such as mapping.
