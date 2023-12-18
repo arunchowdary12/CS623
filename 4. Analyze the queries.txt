@@ -1,0 +1,3 @@
+EXPLAIN SELECT * FROM locations WHERE feature_type = 'Park';
+
+Analysis: The EXPLAIN command in SQL provides insight into the query execution plan. In this specific query, the output of EXPLAIN will reveal details about how the database engine plans to retrieve the data. It might involve scanning an index on the "feature_type" column or performing a sequential scan of the "locations" table. Analyzing the output can help identify potential optimization opportunities, ensuring efficient retrieval of park-related data from the database.
